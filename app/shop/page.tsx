@@ -71,7 +71,6 @@ export default async function ShopPage({
               }`}
             >
               {col.title}
-              <span className="ml-1.5 text-xs opacity-60">{col.count}</span>
             </Link>
           ))}
         </div>

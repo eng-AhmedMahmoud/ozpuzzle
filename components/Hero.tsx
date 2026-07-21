@@ -1,9 +1,9 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "motion/react";
 import JigsawHero from "./JigsawHero";
 import PieceIcon from "./PieceIcon";
-import { SHOP_URL } from "@/lib/data";
 
 const headline = ["Piece", "together", "something", "wonderful."];
 
@@ -72,14 +72,12 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
             className="mt-9 flex flex-wrap items-center gap-4"
           >
-            <a
-              href={SHOP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/shop"
               className="rounded-full bg-terra px-8 py-4 font-semibold text-paper shadow-[0_14px_30px_-10px_rgba(228,87,46,0.65)] transition-transform hover:-translate-y-0.5"
             >
               Shop the puzzles
-            </a>
+            </Link>
             <a
               href="#custom"
               className="rounded-full border-2 border-ink/20 px-8 py-4 font-semibold text-ink transition-colors hover:border-terra hover:text-terra"

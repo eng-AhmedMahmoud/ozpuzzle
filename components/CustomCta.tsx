@@ -1,7 +1,7 @@
 import Image from "next/image";
+import Link from "next/link";
 import Reveal from "./Reveal";
 import PieceIcon from "./PieceIcon";
-import { SHOP_URL } from "@/lib/data";
 
 const steps = [
   {
@@ -75,14 +75,12 @@ export default function CustomCta() {
           </div>
 
           <Reveal delay={0.35}>
-            <a
-              href={`${SHOP_URL}/collections/customized-puzzle`}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/shop?c=customized-puzzle"
               className="mt-10 inline-block rounded-full bg-paper px-8 py-4 font-semibold text-teal transition-transform hover:-translate-y-0.5 hover:shadow-[0_14px_30px_-10px_rgba(0,0,0,0.4)]"
             >
               Start your custom puzzle
-            </a>
+            </Link>
           </Reveal>
         </div>
       </div>

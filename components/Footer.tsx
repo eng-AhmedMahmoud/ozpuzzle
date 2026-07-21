@@ -1,5 +1,6 @@
+import Link from "next/link";
 import PieceIcon from "./PieceIcon";
-import { INSTAGRAM_URL, SHOP_URL } from "@/lib/data";
+import { INSTAGRAM_URL } from "@/lib/data";
 
 export default function Footer() {
   return (
@@ -16,14 +17,9 @@ export default function Footer() {
             </p>
           </div>
           <nav className="flex flex-col gap-3 text-paper/80">
-            <a
-              href={SHOP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="transition-colors hover:text-sun"
-            >
-              Shop — ozpuzzle.com ↗
-            </a>
+            <Link href="/shop" className="transition-colors hover:text-sun">
+              Shop
+            </Link>
             <a
               href={INSTAGRAM_URL}
               target="_blank"
@@ -32,12 +28,15 @@ export default function Footer() {
             >
               Instagram — @ozpuzzle ↗
             </a>
-            <a href="#collections" className="transition-colors hover:text-sun">
+            <a href="/#collections" className="transition-colors hover:text-sun">
               Collections
             </a>
-            <a href="#custom" className="transition-colors hover:text-sun">
+            <Link
+              href="/shop?c=customized-puzzle"
+              className="transition-colors hover:text-sun"
+            >
               Custom puzzles
-            </a>
+            </Link>
           </nav>
         </div>
 

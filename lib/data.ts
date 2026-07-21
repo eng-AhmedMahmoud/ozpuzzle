@@ -1,6 +1,5 @@
 const CDN = "https://ozpuzzle.com/cdn/shop/files";
 
-export const SHOP_URL = "https://ozpuzzle.com";
 export const INSTAGRAM_URL = "https://www.instagram.com/ozpuzzle/";
 
 export type Collection = {

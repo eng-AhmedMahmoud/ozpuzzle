@@ -47,6 +47,56 @@
   }
 }
 
+/* ---- puzzle loading animation ----------------------------------------- */
+
+.pl-svg {
+  overflow: visible;
+  animation: pl-turn 7s linear infinite;
+}
+
+.pl-piece {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: pl-breathe 1.7s var(--ease-puzzle) infinite;
+}
+
+/* each piece drifts toward its own corner, then snaps back together */
+.pl-p0 { --plx: -14%; --ply: -14%; }
+.pl-p1 { --plx: 14%; --ply: -14%; animation-delay: 0.12s; }
+.pl-p2 { --plx: -14%; --ply: 14%; animation-delay: 0.24s; }
+.pl-p3 { --plx: 14%; --ply: 14%; animation-delay: 0.36s; }
+
+@keyframes pl-turn {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pl-breathe {
+  0%, 12% { transform: translate(0, 0) rotate(0deg); }
+  50% { transform: translate(var(--plx), var(--ply)) rotate(6deg); }
+  88%, 100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+.pl-label::after {
+  content: "…";
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  animation: pl-dots 1.5s steps(4, end) infinite;
+}
+
+@keyframes pl-dots {
+  0% { width: 0; }
+  100% { width: 1.05em; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pl-svg,
+  .pl-piece,
+  .pl-label::after {
+    animation: none;
+  }
+}
+
 /* ---- product description (merchant HTML from Shopify) ----------------- */
 
 .prose-oz {
