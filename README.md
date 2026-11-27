@@ -29,8 +29,15 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## Hosting
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+https://ozpuzzle.devya.dev — a demo storefront for OZ Puzzle that reads ozpuzzle.com's public
+Shopify JSON (no token; checkout hands off to the real store). The Next standalone server runs
+in a stock `node:24.22.1-alpine` container (`ozpuzzle`, loopback `127.0.0.1:3198`) behind nginx
+on the Devya VPS (`deploy/nginx/ozpuzzle.conf`, TLS by certbot). It left Vercel on 2026-11-27.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Deploy:** `bash scripts/deploy-vps.sh` builds origin/main on the Mac (nothing builds on the
+  VPS), ships `releases/<sha>`, points `current` at it and restarts the container. First time:
+  `--setup` installs the nginx site and the certificate.
+- **Merge gate:** Jenkins `continuous-integration/jenkins/pr-head`, which runs
+  `bash scripts/ci-local.sh` (lint, typecheck, standalone build, smoke run).
