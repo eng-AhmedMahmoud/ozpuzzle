@@ -1,0 +1,39 @@
+# OZ Puzzle demo store on the Devya VPS (https://ozpuzzle.devya.dev). Nothing is built here:
+# scripts/deploy-vps.sh builds the Next standalone server on the Mac, ships it to
+# releases/<sha> and points `current` at it; this runs a stock node image over that
+# directory. .env.production lives only on the VPS (chmod 600; empty today: the store
+# reads ozpuzzle.com's public Shopify JSON, no token).
+services:
+  ozpuzzle:
+    image: node:24.22.1-alpine
+    container_name: ozpuzzle
+    restart: unless-stopped
+    # The default bridge: the VPS has no free address pool for per-project networks.
+    network_mode: bridge
+    working_dir: /app
+    command: ["node", "server.js"]
+    user: "1000:1000"
+    env_file: .env.production
+    environment:
+      - NODE_ENV=production
+      - NEXT_TELEMETRY_DISABLED=1
+      - PORT=3000
+      - HOSTNAME=0.0.0.0
+    volumes:
+      # Not :ro, because Next rewrites revalidated pages in .next/server/app. The
+      # release is owned by root except that directory (chowned to 1000 by the
+      # deploy), so the app still can't change anything else.
+      - ./current:/app
+    tmpfs:
+      # next/image writes its optimisation cache here (rebuilt after a restart).
+      - /app/.next/cache:size=128m,uid=1000,gid=1000
+    mem_limit: 384m
+    ports:
+      # Loopback only; nginx proxies ozpuzzle.devya.dev to it.
+      - "127.0.0.1:3198:3000"
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3000/').then(r=>process.exit(r.status<500?0:1)).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s

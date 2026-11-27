@@ -17,7 +17,7 @@ const schibsted = Schibsted_Grotesk({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://ozpuzzle.vercel.app"),
+  metadataBase: new URL("https://ozpuzzle.devya.dev"),
   title: "OZ Puzzle — Handcrafted Wooden Jigsaw Puzzles",
   description:
     "Wooden jigsaw puzzles cut with love in Egypt. Customized photo puzzles, guest book puzzles, dollhouses and whimsical originals.",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     title: "OZ Puzzle — Handcrafted Wooden Jigsaw Puzzles",
     description:
       "Wooden jigsaw puzzles cut with love in Egypt. Customized photo puzzles, guest book puzzles, dollhouses and whimsical originals.",
-    url: "https://ozpuzzle.vercel.app",
+    url: "https://ozpuzzle.devya.dev",
     siteName: "OZ Puzzle",
     images: [
       {
